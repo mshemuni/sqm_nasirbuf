@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         self.gridLayout_2.addWidget(self.label_13, 0, 0, 1, 1)
         self.interval = QtWidgets.QDoubleSpinBox(self.tab)
         self.interval.setDecimals(5)
-        self.interval.setMinimum(0.1)
+        self.interval.setMinimum(0.01)
         self.interval.setMaximum(60.0)
         self.interval.setSingleStep(1.0)
         self.interval.setProperty("value", 0.5)

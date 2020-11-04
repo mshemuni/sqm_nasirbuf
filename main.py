@@ -16,7 +16,6 @@ try:
 
     from gui import ds
     from gui import function
-    from gui import MyGraphicsRectItem
     from logging import getLogger, basicConfig
 
     import argparse
