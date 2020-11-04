@@ -1,2 +1,0 @@
-[2020-11-04 11:43:13,190, ERROR], [data.py, __read__, 48]: list index out of range
-[2020-11-04 11:43:27,227, ERROR], [data.py, __read__, 48]: could not convert string to float: '200Hz'
