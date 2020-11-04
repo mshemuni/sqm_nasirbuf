@@ -116,9 +116,12 @@ class MainWindow(QtWidgets.QMainWindow, ds.Ui_MainWindow):
 
         progress.close()
         if not canceled:
-            self.fDevice.add_table(self.records,
-                                   [map(str, [jd / vd, mag_r / vd, mag_n / vd,
-                                              temperature / vd, flux, nos, 100 * vd / nos, comm])])
+            if vd > 0:
+                self.fDevice.add_table(self.records,
+                                       [map(str, [jd / vd, mag_r / vd, mag_n / vd,
+                                                  temperature / vd, flux, nos, 100 * vd / nos, comm])])
+            else:
+                QtWidgets.QMessageBox.critical(self, "DAG SQM Error", "Couldn't read any data")
 
         self.fDevice.colorify_table(self.records)
 
