@@ -70,7 +70,7 @@ class MainWindow(QtWidgets.QMainWindow, ds.Ui_MainWindow):
         if data is not None:
             file = self.fFile.save_file("CVS (*.cvs)")
             with open(file, "w") as f2w:
-                f2w.write("#JD,Raw Mag, New Mag, Temperature, Flux, Valid Data, Comment\n")
+                f2w.write("#JD,Raw Mag, New Mag, Temperature, Flux, NOS, Valid Data, Comment\n")
                 for line in data:
                     f2w.write(f"{','.join(line)}\n")
         else:
