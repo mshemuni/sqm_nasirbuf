@@ -174,8 +174,8 @@ class MainWindow(QtWidgets.QMainWindow, ds.Ui_MainWindow):
             self.fDevice.clear_table(self.records)
 
 
-def read_once(my_logger):
-    dh = data.Handle("/dev/ttyUSB0", logger=my_logger)
+def read_once(my_logger, port):
+    dh = data.Handle(port, logger=my_logger)
     sample = dh.read()
     try:
         print(", ".join(list(map(str, list(map(float, sample))))))
@@ -183,8 +183,8 @@ def read_once(my_logger):
         my_logger.error(e)
 
 
-def read_sample(my_logger, nos=50):
-    dh = data.Handle("/dev/ttyUSB0", logger=my_logger)
+def read_sample(my_logger, port, nos=50):
+    dh = data.Handle(port, logger=my_logger)
     jd = mag_r = temperature = mag_n = flux = 0
     vd = 0
     dh.connect()
@@ -211,6 +211,7 @@ def main():
     parser.add_argument("-f", "--logfile", default=None, type=str, help="Path to log file")
     parser.add_argument("-g", "--gui", default=False, help="Open GUI", action='store_true')
     parser.add_argument("-n", "--numberOfSamples", default=1, type=int, help="Number of samples")
+    parser.add_argument("-p", "--port", default="/dev/ttyUSB0", type=str, help="Port path")
     args = parser.parse_args()
 
     if args.gui:
@@ -223,10 +224,11 @@ def main():
         basicConfig(filename=args.logfile, level=args.logger, format=LOG_FORMAT)
         my_logger = getLogger()
 
-        if args.numberOfSamples == 1:
-            read_once(my_logger)
-        else:
-            read_sample(my_logger, args.numberOfSamples)
+        if not args.port == "":
+            if args.numberOfSamples == 1:
+                read_once(my_logger, args.port)
+            else:
+                read_sample(my_logger, args.port, args.numberOfSamples)
 
 
 if __name__ == "__main__":
